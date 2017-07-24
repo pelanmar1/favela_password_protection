@@ -1,5 +1,7 @@
 from Tkinter import *
 from datetime import datetime
+import numpy
+import csv
 
 root = Tk()
 
@@ -8,8 +10,16 @@ lastTime = -1
 
 def pressReturn(event):
     print("Train model")
-    root.destroy()
-
+    global timeBetweenPresses
+    global lastTime
+    with open("rythm_train.csv", "a") as fp:
+        timeBetweenPresses = timeBetweenPresses[0:8]
+        wr = csv.writer(fp, dialect='excel')
+        wr.writerow(timeBetweenPresses)
+    
+    timeBetweenPresses = []
+    lastTime = -1
+    
 def key(event):
     global lastTime
     if lastTime is not -1:
