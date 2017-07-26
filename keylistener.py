@@ -2,6 +2,7 @@ from Tkinter import *
 from datetime import datetime
 import numpy
 import csv
+import math
 
 root = Tk()
 
@@ -12,7 +13,7 @@ def pressReturn(event):
     print("Train model")
     global timeBetweenPresses
     global lastTime
-    with open("rythm_train.csv", "a") as fp:
+    with open("csv/dan_test.csv", "a") as fp:
         timeBetweenPresses = timeBetweenPresses[0:8]
         wr = csv.writer(fp, dialect='excel')
         wr.writerow(timeBetweenPresses)
@@ -37,3 +38,15 @@ frame.bind("<Button-1>", callback)
 frame.bind("<Return>", pressReturn)
 frame.pack()
 root.mainloop()
+
+
+def addRndGuy():
+    with open("rnd_test.csv", "a") as fp:
+        for i in range(18):
+            y = []
+            for j in range(8):
+                y.append(round(random.random(),6))
+            wr = csv.writer(fp, dialect='excel')
+            wr.writerow(y)
+            
+        
