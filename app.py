@@ -25,7 +25,7 @@ def login():
         resp = make_response('{"response": '+str(prediction)+'}')
         resp.headers['Content-Type'] = "application/json"
         return resp
-        return render_template('login.html', message='')
+        return render_template('index.html', message='')
 
 if __name__ == "__main__":
     app.run(debug = True)
