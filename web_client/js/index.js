@@ -9,7 +9,15 @@ var numBackspaces=0;
 var currentStatus=0;
 
 document.getElementById("add").addEventListener("click", function(){
-    getFeatures();
+    var feat=getFeatures();
+    var data = {
+        features:feat
+    };
+    $.ajax({
+        type: "POST",
+        url: 'http://127.0.0.1:5000/login',
+        data: data
+});
     
 });
 
@@ -56,6 +64,7 @@ var getFeatures = function(){
         // Get max time between strokes
         features = [totalTime,averageTime,maxTime,numBackspaces];
     }
+    return features;
 }
 
 var startTime, endTime;
