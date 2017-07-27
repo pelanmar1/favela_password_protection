@@ -11,9 +11,7 @@ var currentStatus=0;
 document.getElementById("status").addEventListener("click",function(){
     location.reload();
 });
-document.getElementById("background").addEventListener("click",function(){
-    location.reload();
-});
+
 document.getElementById("add").addEventListener("click", function(){
     var info = {
         "features":getFeatures()
