@@ -5,13 +5,13 @@ from sklearn import svm
 import pandas as pd
 
 def createTrainingData():
-    x_path = 'csv/pedro_train.csv'
+    x_path = 'csv/dan_test.csv'
     dataset = pd.read_csv(x_path,header=-1)
     X = dataset.values
     return X
 
 def createTestingData():
-    x_path = 'csv/dan_test.csv'
+    x_path = 'csv/papa_test.csv'
     dataset = pd.read_csv(x_path,header=-1)
     X = dataset.values
     return X
@@ -25,6 +25,7 @@ def train():
 def test():
     X_test = createTestingData()
     return clf.predict(X_test)
+
 
 
 '''

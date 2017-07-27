@@ -1,5 +1,4 @@
 body {
-	background: #DCDDDF url(https://cssdeck.com/uploads/media/items/7/7AF2Qzt.png);
 	color: #000;
 	font: 14px Arial;
 	margin: 0 auto;
@@ -137,23 +136,23 @@ form:after {
 	-ms-transition: all 0.5s ease;
 	-o-transition: all 0.5s ease;
 	transition: all 0.5s ease;
-	background: #eae7e7 url(https://cssdeck.com/uploads/media/items/8/8bcLQqF.png) no-repeat;
 	border: 1px solid #c8c8c8;
 	color: #777;
 	font: 13px Helvetica, Arial, sans-serif;
 	margin: 0 0 10px;
 	padding: 15px 10px 15px 40px;
 	width: 80%;
+	font-size:15px
 }
 #content form input[type="text"]:focus,
 #content form input[type="password"]:focus {
-	-webkit-box-shadow: 0 0 2px #ed1c24 inset;
-	-moz-box-shadow: 0 0 2px #ed1c24 inset;
-	-ms-box-shadow: 0 0 2px #ed1c24 inset;
-	-o-box-shadow: 0 0 2px #ed1c24 inset;
-	box-shadow: 0 0 2px #ed1c24 inset;
+	-webkit-box-shadow: 0 0 2px #666666 inset;
+	-moz-box-shadow: 0 0 2px #666666 inset;
+	-ms-box-shadow: 0 0 2px #666666 inset;
+	-o-box-shadow: 0 0 2px #666666 inset;
+	box-shadow: 0 0 2px #666666 inset;
 	background-color: #fff;
-	border: 1px solid #ed1c24;
+	border: 1px solid #666666;
 	outline: none;
 }
 #username { background-position: 10px 10px !important }
@@ -225,7 +224,6 @@ form:after {
 	padding: 15px 0;
 }
 .button a {
-	background: url(https://cssdeck.com/uploads/media/items/8/8bcLQqF.png) 0 -112px no-repeat;
 	color: #7E7E7E;
 	font-size: 17px;
 	padding: 2px 0 2px 40px;
@@ -240,3 +238,4 @@ form:after {
 	background-position: 0 -135px;
 	color: #00aeef;
 }
+

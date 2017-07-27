@@ -13,7 +13,7 @@ def pressReturn(event):
     print("Train model")
     global timeBetweenPresses
     global lastTime
-    with open("csv/dan_test.csv", "a") as fp:
+    with open("csv/papa_test.csv", "a") as fp:
         timeBetweenPresses = timeBetweenPresses[0:8]
         wr = csv.writer(fp, dialect='excel')
         wr.writerow(timeBetweenPresses)

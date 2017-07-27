@@ -1,35 +1,35 @@
 <!DOCTYPE html>
-<html >
+<html>
 <head>
   <meta charset="UTF-8">
   <title>FAVELA Password Protection</title>
-
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
   
-      <link rel="stylesheet" href="css/style.css">
 
 </head>
-
-<body>
-  <body>
-<div class="container">
+<body style="background-color:#666666">
+	<div id="status" class="alert alert-warning" role="alert">
+		<strong id="title"> FAVELA Password Protection</strong>
+	</div>
+<div class="container" style="margin-top:150px">
 	<section id="content">
 		<form action="">
 			<h1>FAVELA</h1>
 			<div>
 				<form action="http://127.0.0.1:5000/login" method="post">
-					<input name="mydata" class="pass" type="password" placeholder="Password" required="" id="password"/>
-					<button>cool<button>
-					<input type="submit" value="Add To Traing Set" style="width:40%"/>
-					<input type="submit" value="Train" style="width:40%"/>
-					<input type="submit" value="Test" style="width:80%" />
+					<input name="mydata" type="password" placeholder="Password" id="password"/>
+					<input id="add" type="submit" value="Add To Traing Set" style="width:44%"/>
+					<input id="train" type="submit" value="Train" style="width:44%"/>
+					<input id="test" type="submit" value="Test" style="width:92%;margin-top:-5px"/>
 				</form>
 			</div>
 		</form><!-- form -->
 	</section><!-- content -->
-</div><!-- container -->
-</body>
-  
-    <script src="js/index.js"></script>
+</div><!-- container -->  
+
+<script src="js/index.js"></script>
+
 
 </body>
 </html>
