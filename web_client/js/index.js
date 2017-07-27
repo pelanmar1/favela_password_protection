@@ -10,6 +10,7 @@ var currentStatus=0;
 
 document.getElementById("add").addEventListener("click", function(){
     getFeatures();
+    
 });
 
 document.getElementById("train").addEventListener("click", function(){
@@ -79,6 +80,6 @@ var changeAlert = function(status){
     var classes =['alert alert-warning','alert alert-success','alert alert-danger'];
     document.getElementById('status').className = classes[currentStatus];
     var messages = [' ',' - Welcome',' - Access Denied'];
-    var text = document.createTextNode(messages[status]);
-    document.getElementById('title').appendChild(text)
+    var title = 'FAVELA Password Protection';
+    document.getElementById('title').innerText=title+messages[status];
 }
