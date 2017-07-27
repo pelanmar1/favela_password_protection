@@ -18,12 +18,12 @@ def createTestingData():
 
 clf = svm.OneClassSVM(nu=0.05, kernel='rbf', gamma=23.308900000000001)
 
-def train():
-    X_train = createTrainingData()
+def train(training_set):
+    X_train = training_set
     clf.fit(X_train)
 
-def test():
-    X_test = createTestingData()
+def test(testset):
+    X_test = testset
     return clf.predict(X_test)
 
 

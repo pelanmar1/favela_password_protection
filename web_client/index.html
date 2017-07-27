@@ -9,7 +9,7 @@
 
 
 </head>
-<body style="background-color:#666666">
+<body id="background" style="background-color:#666666">
 	<div id="status" class="alert alert-warning" role="alert">
 		<strong id="title"> FAVELA Password Protection</strong>
 	</div>
@@ -18,18 +18,18 @@
 		<form action="">
 			<h1>FAVELA</h1>
 			<div>
-				<form action="http://127.0.0.1:5000/login" method="post">
-					<input name="mydata" type="password" placeholder="Password" id="password"/>
+					<input type="password" placeholder="Password" id="password"/>
 					<input id="add" type="submit" value="Add To Traing Set" style="width:44%"/>
 					<input id="train" type="submit" value="Train" style="width:44%"/>
 					<input id="test" type="submit" value="Test" style="width:92%;margin-top:-5px"/>
-				</form>
+					<a  onclick = "clean();" href="index.html" style="margin-bottom:30px"> Clean Training Set</a>
+
 			</div>
 		</form><!-- form -->
 	</section><!-- content -->
 </div><!-- container -->  
 
-<script src="js/index.js"></script>
+<script src="js/index.js" ></script>
 
 
 </body>
