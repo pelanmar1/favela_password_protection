@@ -3,78 +3,78 @@ import matplotlib.pyplot as plt
 import matplotlib.font_manager
 from sklearn import svm
 import pandas as pd
+from sklearn.cross_validation import train_test_split
 
-def createTrainingData():
-    x_path = 'csv/pedro_train.csv'
-    dataset = pd.read_csv(x_path,header=-1)
-    X = dataset.values
-    return X
+class SVM:
+    clf = svm.OneClassSVM(nu=0.05, kernel='rbf', gamma=1)
 
-def createTestingData():
-    x_path = 'csv/dan_test.csv'
-    dataset = pd.read_csv(x_path,header=-1)
-    X = dataset.values
-    return X
+    def createTrainingData():
+        x_path = 'csv/pedro_train.csv'
+        dataset = pd.read_csv(x_path,header=-1)
+        X = dataset.values
+        return X
 
-clf = svm.OneClassSVM(nu=0.05, kernel='rbf', gamma=23.308900000000001)
-
-def train(training_set):
-    X_train = training_set
-    clf.fit(X_train)
-
-def test(testset):
-    X_test = testset
-    return clf.predict(X_test)
+    def createTestingData():
+        x_path = 'csv/dan_test.csv'
+        dataset = pd.read_csv(x_path,header=-1)
+        X = dataset.values
+        return X
 
 
+    def train(training_set):
+        X_train = training_set
+        n,g = SVM.chooseBestParams(X_train)
+        file = open("train.txt", "a")
+        file.write('N:'+str(n)+','+'G:'+str(g))
+        file.close()
+        SVM.clf = svm.OneClassSVM(nu=n, kernel='rbf', gamma=g)
+        SVM.clf.fit(X_train)
 
-'''
-y_pred_train = clf.predict(X_train)
-y_pred_test = clf.predict(X_test)
+    def test(testset):
+        X_test = testset
+        prediction = SVM.clf.predict(X_test)
+        return prediction
 
-n_error_train = y_pred_train[y_pred_train == 1].size
-n_error_test = y_pred_test[y_pred_test == -1].size
+    def splitTrainingData(X,percentage=0.6):
+        limit = int(X.shape[0]*percentage)
+        X_train = X[:limit]
+        X_test = X[limit:]
+        return (X_train,X_test)
 
-train_precision = n_error_train/len(y_pred_train)
-test_precision = n_error_test/len(y_pred_test)
+    def chooseBestParams(X):
+        prec_avg_arr = []
+        best_avg = -1
+        best_n_index = -1
+        best_g_index = -1
 
-#(0.0027000000000000001, 0.0001, 23.308900000000001)
+        X_train,X_test = SVM.splitTrainingData(X)
+        n = np.arange(0.01, 0.06, 0.001)
+        g = np.arange(0.01, 1.1, 0.01)
 
-print('TRAIN:',train_precision*100,'%')
-print('TEST:',test_precision*100,'%')
+        for i in range(len(n)):
+            for j in range(len(g)):
+                temp = svm.OneClassSVM(nu=n[i], kernel='rbf', gamma=g[j])
+                temp.fit(X_train)
 
+                y_pred_train = temp.predict(X_train)
+                y_pred_test = temp.predict(X_test)
 
-def selectBestParam(X_train, X_test):
-    gammas = np.arange(0.0001, 100, 0.0001)
+                n_error_train = y_pred_train[y_pred_train == 1].size
+                n_error_test = y_pred_test[y_pred_test == 1].size
 
-    prec_train_arr = []
-    prec_test_arr = []
-    prec_avg_arr = []
+                train_precision = n_error_train / len(y_pred_train)
+                test_precision = n_error_test / len(y_pred_test)
 
-    for g in gammas:
-        clf = svm.OneClassSVM(nu=0.05, kernel='rbf', gamma=g)
-        clf.fit(X_train)
+                avg = (train_precision + test_precision) / 2
+                
+                if avg>best_avg:
+                    best_avg = avg
+                    best_n_index = i
+                    best_g_index = j
+                
 
-        y_pred_train = clf.predict(X_train)
-        y_pred_test = clf.predict(X_test)
+            best_nu = n[best_n_index]
+            best_gamma = g[best_g_index]
 
-        n_error_train = y_pred_train[y_pred_train == 1].size
-        n_error_test = y_pred_test[y_pred_test == -1].size
+            return (best_nu,best_gamma)
 
-        train_precision = n_error_train / len(y_pred_train)
-        test_precision = n_error_test / len(y_pred_test)
-
-        prec_train_arr.append(train_precision)
-        prec_test_arr.append(test_precision)
-        prec_avg_arr.append((train_precision + test_precision) / 2)
-
-    best_train_index = prec_train_arr.index(max(prec_train_arr))
-    best_test_index = prec_test_arr.index(max(prec_test_arr))
-    best_avg_index = prec_avg_arr.index(max(prec_avg_arr))
-
-    best_train_gamma = gammas[best_train_index]
-    best_test_gamma = gammas[best_test_index]
-    best_avg_gamma = gammas[best_avg_index]
-
-    return (best_train_gamma, best_test_gamma, best_avg_gamma)
-'''

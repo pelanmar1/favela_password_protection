@@ -3,9 +3,9 @@ from flask import make_response
 from flask import jsonify
 from flask import json
 import ast
-import one_class_svm
 import json
-import one_class_svm
+from one_class_svm import SVM
+import numpy as np
 
 app = Flask(__name__)
 training_set = []
@@ -25,7 +25,7 @@ def login():
         features = ast.literal_eval(features)
         training_set.append(list(features))
         file = open("log.txt", "a")
-        file.write(str(training_set))
+        file.write(str(training_set)+'\n')
         file.close()
         return 'Training Sample Added'
 
@@ -33,7 +33,8 @@ def login():
 def trainMethod():
     message = None
     if request.method == 'GET':
-        one_class_svm.train(training_set)
+        training_np = np.array(training_set)
+        SVM.train(training_np)
         return "Data trained"
 
 @app.route('/test', methods=['GET', 'POST'])
@@ -43,7 +44,9 @@ def testMethod():
         if len(training_set)>0:
             features = json.dumps(request.get_json(force=True)['features'])
             features = ast.literal_eval(features)
-            response = str(one_class_svm.test(features))
+            features = np.array(features).reshape((1,len(features)))
+            response = SVM.test(features)
+            response = str(response)
         return response
 
 @app.route('/clean', methods=['GET', 'POST'])
